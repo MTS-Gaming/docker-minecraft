@@ -19,12 +19,13 @@ services:
       TYPE: "PAPER"
       SERVER_NAME: "survival"
       VERSION: LATEST
-      MODS: https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+      MODS: https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot,https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v3.13/BlueMap-3.13-spigot.jar
       TZ: "Australia/Melbourne"
       SYNC_SKIP_NEWER_IN_DESTINATION: "false"
     ports:
       - 25565:25565
       - 19132:19132/udp
+      - 8100:8100
     volumes:
       - survival:/data
       - ./config/survival:/plugins

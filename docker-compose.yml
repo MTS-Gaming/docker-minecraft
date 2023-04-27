@@ -27,7 +27,7 @@ services:
       - 19132:19132/udp
     volumes:
       - survival:/data
-      - ./config/survival/Geyser-Spigot/config.yml:/plugins/Geyser-Spigot/config.yml
+      - ./config/survival:/plugins
     tty: true
     stdin_open: true
     restart: always

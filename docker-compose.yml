@@ -1,33 +1,12 @@
 version: "3"
 
 services:
-  bungeecord:
-    container_name: minecraft-proxy
-    image: itzg/bungeecord
-    environment:
-      TYPE: WATERFALL
-      DEBUG: "false"
-      TZ: "Australia/Melbourne"
-      CFG_MOTD: "MTS-Gaming 1.18"
-      REPLACE_ENV_VARIABLES: "true"
-    ports:
-      - 25565:25577
-    volumes:
-      - ./config:/config
-      - wf-server:/server
-    links:
-      - "survival"
-    networks:
-      - default
-      - minecraft
   survival:
     container_name: minecraft-survival
     image: itzg/minecraft-server
     environment:
       EULA: "TRUE"
-      MOTD: "MTS-Gaming 1.18"
-      OPS: "St0ner1995"
-      ENABLE_RCON: "true"
+      MOTD: "MTS-Gaming"
       MAX_PLAYERS: "64"
       MAX_WOLD_SIZE: "10000"
       ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
@@ -36,21 +15,27 @@ services:
       SPAWN_PROTECTION: "0"
       VIEW_DISTANCE: "16"
       MODE: "survival"
-      MEMORY: "8G"
+      MEMORY: "4G"
       TYPE: "PAPER"
       SERVER_NAME: "survival"
+      VERSION: LATEST
+      MODS: https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
       TZ: "Australia/Melbourne"
+      SYNC_SKIP_NEWER_IN_DESTINATION: "false"
+    ports:
+      - 25565:25565
+      - 19132:19132/udp
     volumes:
       - survival:/data
+      - ./config/survival/Geyser-Spigot/config.yml:/plugins/Geyser-Spigot/config.yml
     tty: true
     stdin_open: true
     restart: always
-    networks:
-      - minecraft
+    healthcheck:
+      test: mc-health
+      start_period: 5m
+      interval: 5s
+      retries: 20
 
 volumes:
-  wf-server:
   survival:
-
-networks:
-  minecraft:

@@ -1,4 +1,4 @@
 # docker-minecraft
 Minecraft docker-compose configuration
 
-Currently untested
+It's somewhat tested and seems to work
